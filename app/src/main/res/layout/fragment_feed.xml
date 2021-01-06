@@ -26,12 +26,14 @@
             app:tabTextColor="#000000">
 
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/publicReview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Public Review" />
 
 
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/myReview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="My Review" />

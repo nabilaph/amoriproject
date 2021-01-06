@@ -14,11 +14,14 @@ import com.example.amoriproject.Adapter.SectionPagerAdapter;
 import com.example.amoriproject.R;
 import com.example.amoriproject.feed_fragment.MyReviewFragment;
 import com.example.amoriproject.feed_fragment.PublicReviewFragment;
+import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 public class FeedFragment extends Fragment {
 
     TabLayout tabLayout;
+    TabItem myReview;
+    TabItem publicReview;
     ViewPager vp;
 
     View myFragment;
@@ -30,6 +33,7 @@ public class FeedFragment extends Fragment {
     public static FeedFragment getInstance(){
         return new FeedFragment();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,6 +42,9 @@ public class FeedFragment extends Fragment {
 
         vp = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
+        myReview = myFragment.findViewById(R.id.myReview);
+        publicReview = myFragment.findViewById(R.id.publicReview);
+
 
         return myFragment;
     }
@@ -48,12 +55,12 @@ public class FeedFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         setUpViewPager(vp);
-        tabLayout.setupWithViewPager(vp);
+//        tabLayout.setupWithViewPager(vp);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
+                vp.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -70,10 +77,13 @@ public class FeedFragment extends Fragment {
 
     private void setUpViewPager(ViewPager viewPager) {
 
-        SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
+        SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager(), tabLayout.getTabCount());
 
-        adapter.addFragment(new PublicReviewFragment(), "Public Review");
-        adapter.addFragment(new MyReviewFragment(), "My Review");
+        viewPager.setAdapter(adapter);
+
+
+//        adapter.addFragment(new PublicReviewFragment(), "Public Review");
+//        adapter.addFragment(new MyReviewFragment(), "My Review");
     }
 
 }

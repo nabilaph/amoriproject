@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feed_fragment.MyReviewFragment">
+    tools:context=".feed_fragment.MyReviewFragment"
+    android:background="#9C7F68">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
