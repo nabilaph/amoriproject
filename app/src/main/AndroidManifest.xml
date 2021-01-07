@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/amori_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Dashboard"></activity>
+        <activity android:name=".NewReview"></activity>
+        <activity android:name=".Dashboard" />
         <activity android:name=".Register" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity">

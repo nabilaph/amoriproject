@@ -2,26 +2,35 @@ package com.example.amoriproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.amoriproject.Database.DBHelper;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class Register extends AppCompatActivity {
 
-    Button login;
-    TextInputLayout username, pass;
+    Button login, regis;
+    TextInputLayout fullname, email, username, pass;
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        dbHelper = new DBHelper(this);
+
+        fullname = findViewById(R.id.fullname);
+        email = findViewById(R.id.email);
         username = findViewById(R.id.username);
         pass = findViewById(R.id.password);
         login = findViewById(R.id.btn_login);
+        regis = findViewById(R.id.btn_regis);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,5 +39,35 @@ public class Register extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        regis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String full_name = fullname.getEditText().getText().toString().trim();
+                String mail = email.getEditText().getText().toString().trim();
+                String user =  username.getEditText().getText().toString().trim();
+                String password =  pass.getEditText().getText().toString().trim();
+
+                ContentValues values = new ContentValues();
+
+                if (password.equals("") || username.equals("")) {
+                    Toast.makeText(Register.this, "Username or Password cannot be empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    values.put(DBHelper.row_fullname, full_name);
+                    values.put(DBHelper.row_email, mail);
+                    values.put(DBHelper.row_username, user);
+                    values.put(DBHelper.row_password, password);
+                    dbHelper.insertData(values);
+
+                    Toast.makeText(Register.this, "Register succesful", Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(Register.this, Login.class);
+                    startActivity(i);
+
+                    finish();
+                }
+            }
+        });
     }
+
 }

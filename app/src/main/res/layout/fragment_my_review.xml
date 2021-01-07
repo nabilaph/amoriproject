@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".feed_fragment.MyReviewFragment"
-    android:background="#9C7F68">
+    android:background="@color/darkCream">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

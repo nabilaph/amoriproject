@@ -62,7 +62,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="Email"
             app:boxStrokeColor="#FFDDC2"
-            app:hintTextColor="#9C7F68"
+            app:hintTextColor="#DAA67E"
             android:textSize="12sp">
 
             <com.google.android.material.textfield.TextInputEditText
