@@ -14,7 +14,7 @@
         android:fontFamily="@font/poppins_semibold"
         android:gravity="center"
         android:padding="15dp"
-        android:text="Add Review"
+        android:text="Edit Review"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,14 +80,14 @@
             android:fontFamily="@font/poppins_semibold"/>
 
         <Button
-            android:id="@+id/btn_postRev"
+            android:id="@+id/btn_updateRev"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:backgroundTint="@color/cream"
             android:textColor="#000000"
             android:fontFamily="@font/poppins_semibold"
-            android:text="Post"
+            android:text="Update"
             android:padding="5dp"
             android:textSize="12sp" />
     </LinearLayout>

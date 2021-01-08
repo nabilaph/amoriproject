@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +21,12 @@ public class Dashboard extends AppCompatActivity {
 
     ImageView addReview;
 
+    SharedPreferences sp;
+
+    String SP_NAME = "mypref";
+    String KEY_UNAME = "username";
+    String KEY_PASS = "password";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +35,12 @@ public class Dashboard extends AppCompatActivity {
         addReview = findViewById(R.id.addRev);
         chipnav = findViewById(R.id.chipnav);
 
+        sp = getSharedPreferences(SP_NAME, MODE_PRIVATE);
+
+        //check availability of sp
+        String name = sp.getString(KEY_UNAME, null);
+        String pass = sp.getString(KEY_PASS, null);
+
         chipnav.setItemSelected(R.id.nav_home, true);
         getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment, new HomeFragment()).commit();
 
@@ -35,6 +48,7 @@ public class Dashboard extends AppCompatActivity {
 
             @Override
             public void onItemSelected(int i) {
+
                 switch(i){
                     case R.id.nav_feed:
                         fragment = new FeedFragment();

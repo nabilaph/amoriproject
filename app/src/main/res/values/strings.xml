@@ -2,4 +2,12 @@
     <string name="app_name">Amori Project</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="productCategory">
+        <item>Select Product Category</item>
+        <item>Make Up</item>
+        <item>Skin Care</item>
+        <item>Body Care</item>
+        <item>Beauty Tools</item>
+        <item>Others</item>
+    </string-array>
 </resources>

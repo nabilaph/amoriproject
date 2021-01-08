@@ -30,6 +30,7 @@
                 android:textSize="18sp"/>
 
             <TextView
+                android:id="@+id/bigFullname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Full Name"
@@ -38,6 +39,7 @@
                 android:textSize="20sp"/>
 
             <TextView
+                android:id="@+id/bigUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Username"

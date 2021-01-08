@@ -3,15 +3,13 @@ package com.example.amoriproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Build;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.amoriproject.Database.DBHelper;
+import com.example.amoriproject.utils.DBHelper;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class Login extends AppCompatActivity {
@@ -19,6 +17,11 @@ public class Login extends AppCompatActivity {
     Button register, login;
     TextInputLayout username, pass;
     DBHelper dbHelper;
+    SharedPreferences sp;
+
+    String SP_NAME = "mypref";
+    String KEY_UNAME = "username";
+    String KEY_PASS = "password";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,17 @@ public class Login extends AppCompatActivity {
         login = findViewById(R.id.btn_login);
 
         dbHelper = new DBHelper(this);
+
+        sp = getSharedPreferences(SP_NAME, MODE_PRIVATE);
+
+        //check availability of sp
+        String name = sp.getString(KEY_UNAME, null);
+
+        if (name!= null){
+            startActivity(new Intent(Login.this, Dashboard.class));
+        }
+
+
 
         register.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -48,6 +62,11 @@ public class Login extends AppCompatActivity {
 
                 Boolean res = dbHelper.checkUser(user, password);
                 if (res == true) {
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString(KEY_UNAME, user);
+                    editor.putString(KEY_PASS, password);
+                    editor.commit();
+
                     Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT) .show();
                     startActivity(new Intent(Login.this, Dashboard.class));
                 } else {

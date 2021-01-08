@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.amoriproject.Database.DBHelper;
+import com.example.amoriproject.utils.DBHelper;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class Register extends AppCompatActivity {
@@ -57,11 +57,11 @@ public class Register extends AppCompatActivity {
                     values.put(DBHelper.row_email, mail);
                     values.put(DBHelper.row_username, user);
                     values.put(DBHelper.row_password, password);
-                    dbHelper.insertData(values);
+                    dbHelper.insertUser(values);
 
                     Toast.makeText(Register.this, "Register succesful", Toast.LENGTH_SHORT).show();
 
-                    Intent i = new Intent(Register.this, Login.class);
+                    Intent i = new Intent( Register.this, Login.class);
                     startActivity(i);
 
                     finish();
