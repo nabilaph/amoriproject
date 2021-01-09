@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amoriproject.Login;
@@ -27,7 +28,8 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ProfileFragment extends Fragment {
 
-    TextInputLayout fullname, username, password, email, bigFullname, bigUsername;
+    TextInputLayout fullname, username, password, email;
+    TextView bigFullname, bigUsername;
     Button updateProfile, logOut;
 
     Context context;
@@ -62,6 +64,16 @@ public class ProfileFragment extends Fragment {
         bigUsername = myFragment.findViewById(R.id.bigUsername);
 
         updateProfile = myFragment.findViewById(R.id.btn_update);
+        updateProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateProfile(fullname.getEditText().getText().toString(),
+                        username.getEditText().getText().toString(),
+                        email.getEditText().getText().toString(),
+                        password.getEditText().getText().toString());
+            }
+        });
+
         logOut = myFragment.findViewById(R.id.btn_logout);
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,8 +114,14 @@ public class ProfileFragment extends Fragment {
         email.getEditText().setText(userData.get(2));
         username.getEditText().setText(userData.get(3));
         password.getEditText().setText(userData.get(4));
-        bigFullname.getEditText().setText(userData.get(1));
-        bigUsername.getEditText().setText(userData.get(3));
+        bigFullname.setText(userData.get(1));
+        bigUsername.setText(userData.get(3));
+    }
+
+    public void updateProfile(String fullname, String email, String username, String password){
+        db = new DBHelper(context);
+        db.updateProfileData(fullname, email, username, password);
+        Toast.makeText(getContext(), "Profile Updated", Toast.LENGTH_SHORT).show();
     }
 
 }

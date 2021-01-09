@@ -101,8 +101,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + table_user + " SET " + row_fullname + " = (?), " + row_email +
                 " = (?), " + "" + row_username + " = (?), " + row_password + "=(?) WHERE "
-                + row_idUser + " = (?)",new String[]{" + table_user + ", "+ row_fullname + ",
-                " + row_email + ", " + row_username + ", " + row_password + ", " + row_idUser + "});
+                + row_idUser + " = (?)",new String[]{Fullname, Email, Username, Password});
     }
 
     public void deleteProfileData(String idUser) {
@@ -116,16 +115,49 @@ public class DBHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public void updateReview(String idReview ,String NamaProduk, String isiReview, String username, String tanggal ) {
+    public boolean updateReview(String idReview ,String NamaProduk, String ProdukKategori, String isiReview, String username, String tanggal ) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + table_review + " SET " + row_namaProduk + " = (?), " + row_isiReview +" = (?), " +row_username + " " +
-                "= (?), " + row_tanggal + "=(?) WHERE " + row_idReview + " = (?)",new String[]{" + table_review + ", "+ row_isiReview + ",
-                " + row_tanggal + ", " + row_idReview + "});
+                "= (?), " + row_tanggal + "=(?) WHERE " + row_idReview + " = (?)",new String[]{NamaProduk, ProdukKategori, isiReview, username, tanggal, idReview});
+
+        return true;
     }
 
-    public void deleteReview(String idReview) {
+    public boolean deleteReview(String idReview) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " +table_review+" WHERE "+row_idReview+"=(?)",new String[]{idReview});
+
+        return true;
+    }
+
+    public int getIdRev(String productName, String productCategory, String reviewDet, String username, String tanggal){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT " + row_idReview +
+                " FROM " + table_review + " WHERE " + row_namaProduk +
+                "=(?) and " + row_category +
+                "=(?) and "+ row_isiReview +
+                "=(?) and "+ row_tanggal +
+                "=(?) and "+ row_username +
+                "=(?)", new String[]{productName, productCategory, reviewDet, username, tanggal});
+
+        int idRev = res.getInt(0);
+        return idRev;
+    }
+
+    public Cursor fetchMyReview(String username) {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM " + table_review + " WHERE " + row_username +
+                " = ?", new String[]
+                {username});
+        return res;
+    }
+
+    public Cursor getReview(String Kategory_Produk) {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM " + table_review + " WHERE " + row_category +
+                " = ? ", new String[]
+                {Kategory_Produk});
+        return res;
     }
 
 }

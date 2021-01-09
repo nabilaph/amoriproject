@@ -1,16 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".nav_fragment.HomeFragment"
-    android:background="#ffff">
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="1dp"
+        android:background="#FFFCC07E"
+        android:layout_weight="10"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home fragment"
-        android:gravity="center"/>
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:background="@drawable/border"
+            android:drawableRight="@drawable/MakeupAm"
+            android:paddingRight="50dp"
+            android:paddingLeft="60dp"
+            android:text="Make Up"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25dp"></RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#FFFCC07E"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="1dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:background="@drawable/border"
+                android:drawableRight="@drawable/Skincare"
+                android:paddingRight="50dp"
+                android:paddingLeft="60dp"
+                android:text="Skincare"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25dp"></RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:background="#FFFCC07E"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="1dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:background="@drawable/border"
+                android:drawableEnd="@drawable/bodyCare"
+                android:paddingLeft="60dp"
+                android:paddingRight="50dp"
+                android:text="Body Care"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25dp"></RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:background="#FFFCC07E"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="1dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/border"
+                android:drawableRight="@drawable/beautyTools"
+                android:paddingRight="50dp"
+                android:paddingLeft="60dp"
+                android:text="Beauty Tools"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="1dp"
+        android:background="@drawable/form"
+        android:layout_weight="10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_gradasi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:text="About Us"
+            android:textAlignment="center"
+            android:textColor="#A01862"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25dp"></RelativeLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:layout_margin="1dp"
+
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25dp"></RelativeLayout>
+
+        <EditText
+
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textStyle="bold"
+            android:background="@drawable/form"
+            android:text="Sebuah platform untuk memudahkan user menemukan dan mengetahui produk make up, skincare, dan body care yang sesuai dengan kebutuhan dan kriteria produk yang mereka inginkan dengan mudah. Selain itu user bisa menuliskan review produk yang bisa dibaca oleh semua orang dan saling sharing mengenai banyak produk."
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="250dp" />
+
+
+    </LinearLayout>
+
+
+</ScrollView>
