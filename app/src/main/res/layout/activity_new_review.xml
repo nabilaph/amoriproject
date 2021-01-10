@@ -29,6 +29,8 @@
         android:fontFamily="@font/poppins"
         android:hint="Product To Review, ex: Maybelline Mascara"
         android:textSize="12sp"
+        android:background="@drawable/round_border"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -40,7 +42,7 @@
         android:layout_margin="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productName" />
+        app:layout_constraintTop_toBottomOf="@+id/productName"/>
 
 
     <EditText
@@ -52,6 +54,8 @@
         android:gravity="start"
         android:hint="Type your review here..."
         android:textSize="12sp"
+        android:background="@drawable/round_border"
+        android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

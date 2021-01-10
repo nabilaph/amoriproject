@@ -1,5 +1,6 @@
 package com.example.amoriproject.nav_fragment;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -63,14 +64,22 @@ public class ProfileFragment extends Fragment {
         bigFullname = myFragment.findViewById(R.id.bigFullname);
         bigUsername = myFragment.findViewById(R.id.bigUsername);
 
+        sp = getContext().getSharedPreferences(SP_NAME, MODE_PRIVATE);
+
+        //check availability of sp
+        final String name = sp.getString(KEY_UNAME, null);
+        String pass = sp.getString(KEY_PASS, null);
+
+        displayProfile(name);
+
         updateProfile = myFragment.findViewById(R.id.btn_update);
         updateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateProfile(fullname.getEditText().getText().toString(),
-                        username.getEditText().getText().toString(),
+                updateProfile(name, fullname.getEditText().getText().toString(),
                         email.getEditText().getText().toString(),
                         password.getEditText().getText().toString());
+
             }
         });
 
@@ -87,14 +96,6 @@ public class ProfileFragment extends Fragment {
                 startActivity(i);
             }
         });
-
-        sp = getActivity().getSharedPreferences(SP_NAME, MODE_PRIVATE);
-
-        //check availability of sp
-        String name = sp.getString(KEY_UNAME, null);
-        String pass = sp.getString(KEY_PASS, null);
-
-        displayProfile(name);
 
         return myFragment;
     }
@@ -118,9 +119,20 @@ public class ProfileFragment extends Fragment {
         bigUsername.setText(userData.get(3));
     }
 
-    public void updateProfile(String fullname, String email, String username, String password){
+    public void updateProfile(String usernameSP, String fullname, String email, String password){
         db = new DBHelper(context);
-        db.updateProfileData(fullname, email, username, password);
+        int idUser = db.getIdUser(usernameSP);
+
+//        ContentValues cv = new ContentValues();
+//        cv.put("_idUser", idUser);
+//        cv.put("FullName", fullname);
+//        cv.put("Email", email);
+//        cv.put("Username", username);
+//        cv.put("Password", password);
+//        db.updateProfileData(cv, String.valueOf(idUser));
+
+        db.updateProfileData(fullname, email, password, String.valueOf(idUser));
+
         Toast.makeText(getContext(), "Profile Updated", Toast.LENGTH_SHORT).show();
     }
 

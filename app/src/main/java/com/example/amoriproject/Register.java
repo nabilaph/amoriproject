@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,12 +19,18 @@ public class Register extends AppCompatActivity {
     TextInputLayout fullname, email, username, pass;
     DBHelper dbHelper;
 
+    String SP_NAME = "mypref";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         dbHelper = new DBHelper(this);
+
+        SharedPreferences sp = getSharedPreferences(SP_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        editor.commit();
 
         fullname = findViewById(R.id.fullname);
         email = findViewById(R.id.email);
@@ -50,8 +57,12 @@ public class Register extends AppCompatActivity {
 
                 ContentValues values = new ContentValues();
 
-                if (password.equals("") || username.equals("")) {
-                    Toast.makeText(Register.this, "Username or Password cannot be empty", Toast.LENGTH_SHORT).show();
+                if (password.equals("") || username.equals("") || full_name.equals("") || mail.equals("") ) {
+                    Toast.makeText(Register.this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+
+                } else if (!dbHelper.checkUser(user, password)){
+                    Toast.makeText(Register.this, "Username already exist", Toast.LENGTH_SHORT).show();
+
                 } else {
                     values.put(DBHelper.row_fullname, full_name);
                     values.put(DBHelper.row_email, mail);

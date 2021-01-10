@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.amoriproject.Adapter.RVAdapter;
+import com.example.amoriproject.Adapter.RVAdapterMyRev;
 import com.example.amoriproject.R;
 import com.example.amoriproject.utils.DBHelper;
 
@@ -24,7 +25,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class MyReviewFragment extends Fragment {
 
     RecyclerView RV_myreview;
-    RVAdapter adapter;
+    RVAdapterMyRev adapter;
     View myFrag;
 
     DBHelper dbHelper;
@@ -47,7 +48,7 @@ public class MyReviewFragment extends Fragment {
         // Inflate the layout for this fragment
         myFrag = inflater.inflate(R.layout.fragment_my_review, container, false);
 
-        sp = getActivity().getSharedPreferences(SP_NAME, MODE_PRIVATE);
+        sp = getContext().getSharedPreferences(SP_NAME, MODE_PRIVATE);
 
         //check availability of sp
         String name = sp.getString(KEY_UNAME, null);
@@ -64,7 +65,7 @@ public class MyReviewFragment extends Fragment {
 
         storeDataInArray(name);
 
-        adapter = new RVAdapter(getContext(),product_name, product_category, review_detail , review_date, username);
+        adapter = new RVAdapterMyRev(getContext(),product_name, product_category, review_detail , review_date, username);
         RV_myreview.setAdapter(adapter);
         RV_myreview.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -87,21 +88,21 @@ public class MyReviewFragment extends Fragment {
         }
     }
 
-    public void deleteMyReview(String productName, String productCategory, String reviewDet, String username, String tanggal){
-        int id = dbHelper.getIdRev(productName, productCategory, reviewDet, username, tanggal);
-        boolean res = dbHelper.deleteReview(String.valueOf(id));
-
-        if (res){
-            Toast.makeText(getContext(), "Review Deleted", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void updateMyReview(String productName, String productCategory, String reviewDet, String username, String tanggal){
-        int id = dbHelper.getIdRev(productName, productCategory, reviewDet, username, tanggal);
-        boolean res = dbHelper.updateReview(productName, productCategory, reviewDet, username, tanggal, String.valueOf(id));
-
-        if (res){
-            Toast.makeText(getContext(), "Review Updated", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    public void deleteMyReview(String productName, String productCategory, String reviewDet, String username, String tanggal){
+//        int id = dbHelper.getIdRev(productName, productCategory, reviewDet, username, tanggal);
+//        boolean res = dbHelper.deleteReview(String.valueOf(id));
+//
+//        if (res){
+//            Toast.makeText(getContext(), "Review Deleted", Toast.LENGTH_SHORT).show();
+//        }
+//    }
+//
+//    public void updateMyReview(String productName, String productCategory, String reviewDet, String username, String tanggal){
+//        int id = dbHelper.getIdRev(productName, productCategory, reviewDet, username, tanggal);
+//        boolean res = dbHelper.updateReview(productName, productCategory, reviewDet, username, tanggal, String.valueOf(id));
+//
+//        if (res){
+//            Toast.makeText(getContext(), "Review Updated", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 }

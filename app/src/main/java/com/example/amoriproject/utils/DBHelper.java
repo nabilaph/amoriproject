@@ -70,20 +70,16 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public boolean checkUser(String username, String password) {
+        SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT " + row_idUser + " FROM " +
                 table_user + " WHERE " + row_username + "=? and " + row_password + "=?", new String[]
                 {username, password});
 
-//        String[] columns = {row_idUser};
-//        SQLiteDatabase db = getReadableDatabase();
-//        String selection = row_username + "=?" + " and " + row_password + "=?";
-//        String[] selectionArgs = {username, password};
-//        Cursor cursor = db.query(table_user, columns, selection, selectionArgs, null, null, null);
         int count = cursor.getCount();
         cursor.close();
         db.close();
 
-        if (count>0)
+        if (count==1)
             return  true;
         else
             return false;
@@ -97,16 +93,17 @@ public class DBHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public void updateProfileData(String Fullname, String Email, String Username, String Password) {
+//    public void updateProfileData(ContentValues values, String id) {
+     public void updateProfileData(String Fullname, String Email, String Password, String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE " + table_user + " SET " + row_fullname + " = (?), " + row_email +
-                " = (?), " + "" + row_username + " = (?), " + row_password + "=(?) WHERE "
-                + row_idUser + " = (?)",new String[]{Fullname, Email, Username, Password});
-    }
+        db.execSQL("UPDATE " + table_user + " SET "
+                + row_fullname + " = (?), "
+                + row_email + " = (?), "
+                +  row_password + "=(?) " +
+                "WHERE " + row_idUser + " = (?)",
+                new String[]{Fullname, Email, Password, id});
 
-    public void deleteProfileData(String idUser) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " +table_user+" WHERE "+row_idUser+"=(?)",new String[]{idUser});
+//        db.update(table_user, values, row_idUser +"=?", new String[]{id});
     }
 
     public Cursor fetchAllReview() {
@@ -115,10 +112,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean updateReview(String idReview ,String NamaProduk, String ProdukKategori, String isiReview, String username, String tanggal ) {
+    public boolean updateReview(String idReview ,String NamaProduk, String ProdukKategori, String isiReview ) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE " + table_review + " SET " + row_namaProduk + " = (?), " + row_isiReview +" = (?), " +row_username + " " +
-                "= (?), " + row_tanggal + "=(?) WHERE " + row_idReview + " = (?)",new String[]{NamaProduk, ProdukKategori, isiReview, username, tanggal, idReview});
+
+        db.execSQL("UPDATE " + table_review + " SET "
+                + row_namaProduk + " = (?), "
+                + row_isiReview +" = (?), "
+                + row_category +" = (?) " +
+                " WHERE " + row_idReview + " = (?)",new String[]{NamaProduk,  isiReview, ProdukKategori, idReview});
 
         return true;
     }
@@ -158,6 +159,21 @@ public class DBHelper extends SQLiteOpenHelper {
                 " = ? ", new String[]
                 {Kategory_Produk});
         return res;
+    }
+
+    public int getIdUser(String Username){
+        int idUser = -1;
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT " + row_idUser +
+                " FROM " + table_user + " WHERE " + row_username +
+                "=(?)", new String[]{Username});
+
+        if (res !=null && res.moveToFirst()){
+            idUser = res.getInt(0);
+
+        }
+        return idUser;
+
     }
 
 }

@@ -1,7 +1,9 @@
 package com.example.amoriproject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,15 +38,15 @@ public class Login extends AppCompatActivity {
         dbHelper = new DBHelper(this);
 
         sp = getSharedPreferences(SP_NAME, MODE_PRIVATE);
-
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        editor.commit();
         //check availability of sp
-        String name = sp.getString(KEY_UNAME, null);
-
-        if (name!= null){
-            startActivity(new Intent(Login.this, Dashboard.class));
-        }
-
-
+//        String name = sp.getString(KEY_UNAME, null);
+//
+//        if (name!= null){
+//            startActivity(new Intent(Login.this, Dashboard.class));
+//        }
 
         register.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -60,20 +62,46 @@ public class Login extends AppCompatActivity {
                 String user =  username.getEditText().getText().toString().trim();
                 String password =  pass.getEditText().getText().toString().trim();
 
-                Boolean res = dbHelper.checkUser(user, password);
-                if (res == true) {
-                    SharedPreferences.Editor editor = sp.edit();
-                    editor.putString(KEY_UNAME, user);
-                    editor.putString(KEY_PASS, password);
-                    editor.commit();
+                if(user.equals("") || password.equals("")){
+                    Toast.makeText(Login.this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+                }else{
+                    Boolean res = dbHelper.checkUser(user, password);
+                    if (res == true) {
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString(KEY_UNAME, user);
+                        editor.putString(KEY_PASS, password);
+                        editor.commit();
 
-                    Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT) .show();
-                    startActivity(new Intent(Login.this, Dashboard.class));
-                } else {
-                    Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT) .show();
+                        startActivity(new Intent(Login.this, Dashboard.class));
+                    } else {
+                        Toast.makeText(Login.this, "Login Failed, please recheck your username or password", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
+
     }
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setMessage("Do you want to Exit?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int pid = android.os.Process.myPid();
+                android.os.Process.killProcess(pid);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 }
