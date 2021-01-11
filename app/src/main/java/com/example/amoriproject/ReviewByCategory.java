@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amoriproject.Adapter.RVAdapter;
@@ -19,6 +20,7 @@ public class ReviewByCategory extends AppCompatActivity {
 
     RecyclerView RV_reviewCat;
     RVAdapter adapter;
+    TextView selectedCategory;
 
     DBHelper dbHelper;
     ArrayList<String> product_name, review_detail, username, review_date, product_category;
@@ -29,6 +31,7 @@ public class ReviewByCategory extends AppCompatActivity {
     String KEY_UNAME = "username";
     String KEY_PASS = "password";
     String KEY_CATEGORY = "category";
+    String selected_category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,9 @@ public class ReviewByCategory extends AppCompatActivity {
         String category = sp.getString(KEY_CATEGORY, null);
 
         RV_reviewCat = findViewById(R.id.rv_reviewCat);
+
+        selectedCategory = findViewById(R.id.selectedCategory);
+        selectedCategory.setText(category);
 
         dbHelper = new DBHelper(this);
 

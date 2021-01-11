@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReviewByCategory">
+    tools:context=".ReviewByCategory"
+    android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rv_reviewCat"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        android:textSize="30sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="@color/darkCream"
+        android:id="@+id/selectedCategory"
+        android:layout_marginBottom="15dp"
         />
-</ScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rv_reviewCat"
+                />
+
+    </ScrollView>
+
+
+</LinearLayout>
