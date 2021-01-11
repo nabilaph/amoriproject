@@ -38,15 +38,13 @@ public class Login extends AppCompatActivity {
         dbHelper = new DBHelper(this);
 
         sp = getSharedPreferences(SP_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.clear();
-        editor.commit();
+
         //check availability of sp
-//        String name = sp.getString(KEY_UNAME, null);
-//
-//        if (name!= null){
-//            startActivity(new Intent(Login.this, Dashboard.class));
-//        }
+        String uname = sp.getString(KEY_UNAME, null);
+
+        if (uname!= null){
+            startActivity(new Intent(Login.this, Dashboard.class));
+        }
 
         register.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -65,8 +63,8 @@ public class Login extends AppCompatActivity {
                 if(user.equals("") || password.equals("")){
                     Toast.makeText(Login.this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
                 }else{
-                    Boolean res = dbHelper.checkUser(user, password);
-                    if (res == true) {
+                    boolean res = dbHelper.checkUser(user, password);
+                    if (res) {
                         SharedPreferences.Editor editor = sp.edit();
                         editor.putString(KEY_UNAME, user);
                         editor.putString(KEY_PASS, password);
@@ -91,8 +89,9 @@ public class Login extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                int pid = android.os.Process.myPid();
-                android.os.Process.killProcess(pid);
+//                int pid = android.os.Process.myPid();
+//                android.os.Process.killProcess(pid);
+                finish();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

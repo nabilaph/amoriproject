@@ -55,7 +55,7 @@ public class FeedFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         setUpViewPager(vp);
-//        tabLayout.setupWithViewPager(vp);
+        tabLayout.setupWithViewPager(vp);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -81,9 +81,6 @@ public class FeedFragment extends Fragment {
 
         viewPager.setAdapter(adapter);
 
-
-//        adapter.addFragment(new PublicReviewFragment(), "Public Review");
-//        adapter.addFragment(new MyReviewFragment(), "My Review");
     }
 
 }

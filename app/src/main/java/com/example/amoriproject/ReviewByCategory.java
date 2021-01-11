@@ -28,7 +28,7 @@ public class ReviewByCategory extends AppCompatActivity {
     String SP_NAME = "mypref";
     String KEY_UNAME = "username";
     String KEY_PASS = "password";
-    String KEY_CAT = "category";
+    String KEY_CATEGORY = "category";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +40,12 @@ public class ReviewByCategory extends AppCompatActivity {
         //check availability of sp
         String name = sp.getString(KEY_UNAME, null);
         String pass = sp.getString(KEY_PASS, null);
-        String category = sp.getString(KEY_CAT, null);
+        String category = sp.getString(KEY_CATEGORY, null);
 
         RV_reviewCat = findViewById(R.id.rv_reviewCat);
 
         dbHelper = new DBHelper(this);
+
         product_name = new ArrayList<>();
         review_detail = new ArrayList<>();
         username = new ArrayList<>();

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +18,6 @@ public class Register extends AppCompatActivity {
     TextInputLayout fullname, email, username, pass;
     DBHelper dbHelper;
 
-    String SP_NAME = "mypref";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +25,6 @@ public class Register extends AppCompatActivity {
 
         dbHelper = new DBHelper(this);
 
-        SharedPreferences sp = getSharedPreferences(SP_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.clear();
-        editor.commit();
 
         fullname = findViewById(R.id.fullname);
         email = findViewById(R.id.email);
@@ -57,10 +51,10 @@ public class Register extends AppCompatActivity {
 
                 ContentValues values = new ContentValues();
 
-                if (password.equals("") || username.equals("") || full_name.equals("") || mail.equals("") ) {
+                if (password.equals("") || user.equals("") || full_name.equals("") || mail.equals("") ) {
                     Toast.makeText(Register.this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
 
-                } else if (!dbHelper.checkUser(user, password)){
+                } else if (dbHelper.checkUsername(user)== true){
                     Toast.makeText(Register.this, "Username already exist", Toast.LENGTH_SHORT).show();
 
                 } else {
@@ -70,7 +64,7 @@ public class Register extends AppCompatActivity {
                     values.put(DBHelper.row_password, password);
                     dbHelper.insertUser(values);
 
-                    Toast.makeText(Register.this, "Register succesful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, "Register successful", Toast.LENGTH_SHORT).show();
 
                     Intent i = new Intent( Register.this, Login.class);
                     startActivity(i);

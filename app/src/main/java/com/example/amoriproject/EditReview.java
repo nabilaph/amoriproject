@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.amoriproject.nav_fragment.FeedFragment;
 import com.example.amoriproject.utils.DBHelper;
 
 public class EditReview extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -65,8 +66,7 @@ public class EditReview extends AppCompatActivity implements AdapterView.OnItemS
         cancelReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EditReview.this, Dashboard.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -76,7 +76,7 @@ public class EditReview extends AppCompatActivity implements AdapterView.OnItemS
                 String product_name = productName.getText().toString();
                 String review_detail = reviewDet.getText().toString();
                 updateReview(id_review, product_name, categorySelected, review_detail);
-                Intent intent = new Intent(EditReview.this, Dashboard.class);
+                Intent intent = new Intent(EditReview.this, FeedFragment.class);
                 startActivity(intent);
             }
         });
@@ -84,21 +84,8 @@ public class EditReview extends AppCompatActivity implements AdapterView.OnItemS
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String categorySelected = parent.getItemAtPosition(position).toString();
-        if (categorySelected.equals("Select Product Category")) {
-            new AlertDialog.Builder(this)
-                    .setIcon(R.drawable.ic_warning)
-                    .setMessage("Please select the category of your product")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+        categorySelected = parent.getItemAtPosition(position).toString();
 
-                        }
-                    })
-                    .show();
-        } else {
-
-        }
     }
 
     @Override
@@ -107,7 +94,6 @@ public class EditReview extends AppCompatActivity implements AdapterView.OnItemS
     }
 
     public void updateReview(String idReview, String productName, String productCategory, String reviewDetail) {
-//        ContentValues values = new ContentValues();
 
         if (categorySelected.equals("Select Product Category")) {
             new AlertDialog.Builder(this)
@@ -121,11 +107,6 @@ public class EditReview extends AppCompatActivity implements AdapterView.OnItemS
                     })
                     .show();
         } else {
-//            values.put(DBHelper.row_namaProduk, productName);
-//            values.put(DBHelper.row_category, productCategory);
-//            values.put(DBHelper.row_isiReview, reviewDetail);
-//            values.put(DBHelper.row_username, username);
-//            values.put(DBHelper.row_tanggal, reviewDate);
             dbHelper.updateReview(idReview, productName, productCategory, reviewDetail);
 
             Toast.makeText(EditReview.this, "Review Updated", Toast.LENGTH_SHORT).show();

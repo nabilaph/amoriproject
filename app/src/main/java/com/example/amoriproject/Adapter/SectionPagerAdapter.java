@@ -13,9 +13,6 @@ import java.util.List;
 
 public class SectionPagerAdapter extends FragmentPagerAdapter {
 
-//    private List<Fragment> fragmentList = new ArrayList<>();
-//    private List<String> titleList = new ArrayList<>();
-
     private int numOfTabs;
 
     public SectionPagerAdapter( FragmentManager fm, int numOfTabs) {
@@ -36,24 +33,12 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
                 return null;
         }
 
-        //return
     }
 
     @Override
     public int getCount() {
 
         return numOfTabs;
-//        return fragmentList.size();
     }
-//
-//    @Nullable
-//    @Override
-//    public CharSequence getPageTitle(int position) {
-//        return titleList.get(position);
-//    }
-//
-//    public void addFragment(Fragment fragment, String title){
-//        fragmentList.add(fragment);
-//        titleList.add(title);
-//    }
+
 }

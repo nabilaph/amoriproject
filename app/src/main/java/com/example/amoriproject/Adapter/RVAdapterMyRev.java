@@ -83,6 +83,7 @@ public class RVAdapterMyRev extends RecyclerView.Adapter<RVAdapterMyRev.RVviewHo
             txt_reviewDet = itemView.findViewById(R.id.text_reviewDet);
             txt_reviewDate = itemView.findViewById(R.id.text_reviewDate);
             txt_username = itemView.findViewById(R.id.text_username);
+
             deleteRev = itemView.findViewById(R.id.btn_deleteRev);
             editRev = itemView.findViewById(R.id.btn_editRev);
 
@@ -110,6 +111,7 @@ public class RVAdapterMyRev extends RecyclerView.Adapter<RVAdapterMyRev.RVviewHo
                     builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
                             boolean res = dbHelper.deleteReview(String.valueOf(id));
 
                             if (res){

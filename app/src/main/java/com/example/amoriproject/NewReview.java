@@ -69,15 +69,18 @@ public class NewReview extends AppCompatActivity implements AdapterView.OnItemSe
         cancelReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewReview.this, Dashboard.class);
-                startActivity(intent);
+                finish();
             }
         });
 
         postReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addReview(productName.getText().toString(), categorySelected, reviewDet.getText().toString(), name, currentDate );
+                addReview(productName.getText().toString(),
+                        categorySelected,
+                        reviewDet.getText().toString(),
+                        name,
+                        currentDate );
                 Intent intent = new Intent(NewReview.this, Dashboard.class);
                 startActivity(intent);
             }
@@ -105,7 +108,7 @@ public class NewReview extends AppCompatActivity implements AdapterView.OnItemSe
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
+                            dialog.cancel();
                         }
                     })
                     .show();

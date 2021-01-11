@@ -94,6 +94,7 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getContext(), "Logged Out", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(context, Login.class);
                 startActivity(i);
+
             }
         });
 
@@ -131,9 +132,11 @@ public class ProfileFragment extends Fragment {
 //        cv.put("Password", password);
 //        db.updateProfileData(cv, String.valueOf(idUser));
 
-        db.updateProfileData(fullname, email, password, String.valueOf(idUser));
+        boolean res = db.updateProfileData(fullname, email, password, String.valueOf(idUser));
 
-        Toast.makeText(getContext(), "Profile Updated", Toast.LENGTH_SHORT).show();
+        if (res){
+            Toast.makeText(getContext(), "Profile Updated", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

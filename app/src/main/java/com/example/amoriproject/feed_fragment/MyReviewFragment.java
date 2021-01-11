@@ -39,7 +39,6 @@ public class MyReviewFragment extends Fragment {
     String KEY_IDREV = "_idReview";
 
     public MyReviewFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -72,7 +71,7 @@ public class MyReviewFragment extends Fragment {
         return myFrag;
     }
 
-    //harus ada method fetchReviewByUsername
+
     public void storeDataInArray(String user_name){
         Cursor cr = dbHelper.fetchMyReview(user_name);
         if(cr.getCount() == 0){
@@ -88,21 +87,4 @@ public class MyReviewFragment extends Fragment {
         }
     }
 
-//    public void deleteMyReview(String productName, String productCategory, String reviewDet, String username, String tanggal){
-//        int id = dbHelper.getIdRev(productName, productCategory, reviewDet, username, tanggal);
-//        boolean res = dbHelper.deleteReview(String.valueOf(id));
-//
-//        if (res){
-//            Toast.makeText(getContext(), "Review Deleted", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//
-//    public void updateMyReview(String productName, String productCategory, String reviewDet, String username, String tanggal){
-//        int id = dbHelper.getIdRev(productName, productCategory, reviewDet, username, tanggal);
-//        boolean res = dbHelper.updateReview(productName, productCategory, reviewDet, username, tanggal, String.valueOf(id));
-//
-//        if (res){
-//            Toast.makeText(getContext(), "Review Updated", Toast.LENGTH_SHORT).show();
-//        }
-//    }
 }

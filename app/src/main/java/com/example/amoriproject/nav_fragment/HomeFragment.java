@@ -1,6 +1,7 @@
 package com.example.amoriproject.nav_fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import android.widget.Button;
 
 import com.example.amoriproject.Adapter.SectionPagerAdapter;
 import com.example.amoriproject.R;
+import com.example.amoriproject.ReviewByCategory;
 import com.example.amoriproject.feed_fragment.MyReviewFragment;
 import com.example.amoriproject.feed_fragment.PublicReviewFragment;
 import com.example.amoriproject.utils.DBHelper;
@@ -66,6 +68,8 @@ public class HomeFragment extends Fragment {
                 String Category = "Make Up";
                 editor.putString(KEY_CATEGORY, Category );
                 editor.commit();
+                Intent i = new Intent(getContext(), ReviewByCategory.class);
+                startActivity(i);
 
             }
         });
@@ -77,6 +81,8 @@ public class HomeFragment extends Fragment {
                 String Category = "Skin Care";
                 editor.putString(KEY_CATEGORY, Category );
                 editor.commit();
+                Intent i = new Intent(getContext(), ReviewByCategory.class);
+                startActivity(i);
 
             }
         });
@@ -88,6 +94,8 @@ public class HomeFragment extends Fragment {
                 String Category = "Body Care";
                 editor.putString(KEY_CATEGORY, Category );
                 editor.commit();
+                Intent i = new Intent(getContext(), ReviewByCategory.class);
+                startActivity(i);
 
             }
         });
@@ -99,9 +107,12 @@ public class HomeFragment extends Fragment {
                 String Category = "Beauty Tools";
                 editor.putString(KEY_CATEGORY, Category );
                 editor.commit();
+                Intent i = new Intent(getContext(), ReviewByCategory.class);
+                startActivity(i);
 
             }
         });
+
         return myFragment;
     }
 
