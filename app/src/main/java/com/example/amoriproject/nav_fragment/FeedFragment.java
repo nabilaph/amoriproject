@@ -56,7 +56,6 @@ public class FeedFragment extends Fragment {
 
         setUpViewPager(vp);
         tabLayout.setupWithViewPager(vp);
-
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -76,11 +75,8 @@ public class FeedFragment extends Fragment {
     }
 
     private void setUpViewPager(ViewPager viewPager) {
-
         SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager(), tabLayout.getTabCount());
-
         viewPager.setAdapter(adapter);
-
     }
 
 }

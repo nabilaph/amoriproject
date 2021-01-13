@@ -107,19 +107,17 @@ public class DBHelper extends SQLiteOpenHelper {
         return res;
     }
 
-//    public void updateProfileData(ContentValues values, String id) {
-     public boolean updateProfileData(String Fullname, String Email, String Password, String id) {
+    public boolean updateProfileData(String Fullname, String Email, String Password, String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE " + table_user + " SET "
-                + row_fullname + " = (?), "
-                + row_email + " = (?), "
-                +  row_password + "=(?) " +
-                "WHERE " + row_idUser + " = (?)",
+                        + row_fullname + " = (?), "
+                        + row_email + " = (?), "
+                        +  row_password + "=(?) " +
+                        "WHERE " + row_idUser + " = (?)",
                 new String[]{Fullname, Email, Password, id});
 
 
-         return true;
-//        db.update(table_user, values, row_idUser +"=?", new String[]{id});
+        return true;
     }
 
     public Cursor fetchAllReview() {
@@ -150,14 +148,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public int getIdRev(String productName, String productCategory, String reviewDet, String username, String tanggal){
         SQLiteDatabase db = getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT " + row_idReview +
-                " FROM " + table_review + " WHERE " + row_namaProduk +
-                "=(?) and " + row_category +
-                "=(?) and "+ row_isiReview +
-                "=(?) and "+ row_tanggal +
-                "=(?) and "+ row_username +
-                "=(?)", new String[]{productName, productCategory, reviewDet, username, tanggal});
-
+        String sql = "SELECT _idReview FROM table_review WHERE Nama_Produk = ? AND Kategory_Produk = ? AND Isi_Review = ? AND Tanggal_Review = ? AND Username = ?";
+        Cursor res = db.rawQuery(sql, new String[]{productName, productCategory, reviewDet, tanggal, username});
+        res.moveToNext();
         int idRev = res.getInt(0);
 
         return idRev;
@@ -177,6 +170,15 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("SELECT * FROM " + table_review + " WHERE " + row_category +
                 " = ? ", new String[]
                 {Kategory_Produk});
+
+        return res;
+    }
+
+    public Cursor getReviewbyId(String idRev) {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM " + table_review + " WHERE " + row_idReview +
+                " = ? ", new String[]
+                {idRev});
 
         return res;
     }

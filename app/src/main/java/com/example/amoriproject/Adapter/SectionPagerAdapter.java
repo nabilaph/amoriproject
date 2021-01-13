@@ -9,16 +9,20 @@ import com.example.amoriproject.feed_fragment.MyReviewFragment;
 import com.example.amoriproject.feed_fragment.PublicReviewFragment;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class SectionPagerAdapter extends FragmentPagerAdapter {
 
     private int numOfTabs;
+    private ArrayList<String> title;
 
     public SectionPagerAdapter( FragmentManager fm, int numOfTabs) {
 
         super(fm);
         this.numOfTabs = numOfTabs;
+        title = new ArrayList<>();
+        title.add("Public Review");
+        title.add("My Review");
     }
 
     @Override
@@ -33,6 +37,12 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
                 return null;
         }
 
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return title.get(position);
     }
 
     @Override

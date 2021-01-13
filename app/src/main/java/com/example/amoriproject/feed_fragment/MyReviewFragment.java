@@ -37,6 +37,7 @@ public class MyReviewFragment extends Fragment {
     String KEY_UNAME = "username";
     String KEY_PASS = "password";
     String KEY_IDREV = "_idReview";
+    String name;
 
     public MyReviewFragment() {
     }
@@ -50,7 +51,7 @@ public class MyReviewFragment extends Fragment {
         sp = getContext().getSharedPreferences(SP_NAME, MODE_PRIVATE);
 
         //check availability of sp
-        String name = sp.getString(KEY_UNAME, null);
+        name = sp.getString(KEY_UNAME, null);
         String pass = sp.getString(KEY_PASS, null);
 
         RV_myreview = myFrag.findViewById(R.id.rv_review_my);
