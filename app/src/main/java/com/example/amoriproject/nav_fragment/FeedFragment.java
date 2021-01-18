@@ -19,6 +19,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class FeedFragment extends Fragment {
 
+    // define variables
     TabLayout tabLayout;
     TabItem myReview;
     TabItem publicReview;
@@ -40,6 +41,7 @@ public class FeedFragment extends Fragment {
         // Inflate the layout for this fragment
         myFragment = inflater.inflate(R.layout.fragment_feed, container, false);
 
+        // find components by id according to the defined variable
         vp = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
         myReview = myFragment.findViewById(R.id.myReview);
@@ -54,6 +56,7 @@ public class FeedFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        //set view pager
         setUpViewPager(vp);
         tabLayout.setupWithViewPager(vp);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -75,6 +78,7 @@ public class FeedFragment extends Fragment {
     }
 
     private void setUpViewPager(ViewPager viewPager) {
+        //set adapter for view pager
         SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
     }

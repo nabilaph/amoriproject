@@ -16,7 +16,11 @@
         <activity android:name=".NewReview" />
         <activity android:name=".Dashboard" />
         <activity android:name=".Register" />
-        <activity android:name=".Login" />
+        <activity
+            android:name="com.example.amoriproject.Login"
+            android:label=""
+            android:noHistory="true">
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

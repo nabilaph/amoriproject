@@ -12,11 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
+    // this is duration of splash screen
     private static int SPLASH_SCREEN = 5000;
 
-    //variables
-    Animation topanim, bottomanim;
+    // Define variables
+    Animation topanim;
     ImageView logo;
 
     @Override
@@ -25,15 +25,15 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        //Animation
+        // input animation from res> anime folder
         topanim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
-        bottomanim = AnimationUtils.loadAnimation(this, R.anim.botton_animation);
 
-        //hooks
+        // find components by id according to the defined variable
         logo = findViewById(R.id.logo_amori);
-
+        // set animation for logo
         logo.setAnimation(topanim);
 
+        //define the next page after splash screen
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -16,6 +16,7 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class Dashboard extends AppCompatActivity {
 
+    // define variables
     private ChipNavigationBar chipnav;
     private Fragment fragment = null;
 
@@ -26,17 +27,22 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        // find components by id according to the defined variable
         addReview = findViewById(R.id.addRev);
         chipnav = findViewById(R.id.chipnav);
 
+        // set item selected in chipnav which is Home fragment
         chipnav.setItemSelected(R.id.nav_home, true);
         getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment, new HomeFragment()).commit();
 
+
+        //set on item selected in chipnav to change the page according to the user select
         chipnav.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(int i) {
 
+                //switch page on dashboard
                 switch(i){
                     case R.id.nav_feed:
                         fragment = new FeedFragment();
@@ -49,6 +55,7 @@ public class Dashboard extends AppCompatActivity {
                         break;
                 }
 
+                //set fragment
                 if (fragment != null){
                     getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment, fragment).commit();
 
@@ -57,9 +64,11 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
+        //set on click button for add review
         addReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //change page from dashboard to new review page
                 Intent intent = new Intent(Dashboard.this, NewReview.class);
                 startActivity(intent);
             }

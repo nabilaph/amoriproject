@@ -15,9 +15,11 @@ import java.util.ArrayList;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RVviewHolder> {
 
+    //define variables
     private Context context;
     private ArrayList product_name, product_category, review_detail, review_date, username;
 
+    //constructor
     public RVAdapter(Context context, ArrayList product_name, ArrayList product_category,
                      ArrayList review_detail, ArrayList review_date, ArrayList username){
         this.context = context;
@@ -30,11 +32,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RVviewHolder> {
 
     public class RVviewHolder extends RecyclerView.ViewHolder{
 
+        //define variables
         TextView txt_productName, txt_productCategory,txt_reviewDet, txt_reviewDate, txt_username;
 
         public RVviewHolder(@NonNull View itemView) {
             super(itemView);
 
+            // find components by id according to the defined variable
             txt_productName = itemView.findViewById(R.id.text_productName);
             txt_productCategory = itemView.findViewById(R.id.text_productCategory);
             txt_reviewDet = itemView.findViewById(R.id.text_reviewDet);
@@ -48,6 +52,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RVviewHolder> {
     @NonNull
     @Override
     public RVviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // set layout for recycler view
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.rv_review_item, parent, false);
 
@@ -57,6 +62,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RVviewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RVviewHolder holder, int position) {
 
+        //set text
         holder.txt_productName.setText(String.valueOf(product_name.get(position)));
         holder.txt_productCategory.setText(String.valueOf(product_category.get(position)));
         holder.txt_reviewDet.setText(String.valueOf(review_detail.get(position)));

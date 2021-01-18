@@ -23,6 +23,7 @@ import java.util.Date;
 
 public class NewReview extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    // define variables
     EditText productName;
     EditText reviewDet;
 
@@ -34,26 +35,32 @@ public class NewReview extends AppCompatActivity implements AdapterView.OnItemSe
     SharedPreferences sp;
     DBHelper dbHelper;
 
+    // define the name of shared preferences and key
     String SP_NAME = "mypref";
     String KEY_UNAME = "username";
     String KEY_PASS = "password";
 
-    String name, pass, categorySelected, currentDate;
+    //define variables
+    String name, categorySelected, currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_review);
 
+        //initiate DBHelper class
         dbHelper = new DBHelper(this);
+
+        //get shared preferences
         sp = getSharedPreferences(SP_NAME, MODE_PRIVATE);
 
         //check availability of sp
         name = sp.getString(KEY_UNAME, null);
-        pass = sp.getString(KEY_PASS, null);
 
+        //get current date
         currentDate = DateFormat.getDateInstance().format(new Date());
 
+        // find components by id according to the defined variable
         productName = findViewById(R.id.productName);
         reviewDet = findViewById(R.id.reviewDet);
 
@@ -61,11 +68,14 @@ public class NewReview extends AppCompatActivity implements AdapterView.OnItemSe
         postReview = findViewById(R.id.btn_postRev);
 
         category = findViewById(R.id.productCategory);
+
+        //set adapter for category spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.productCategory, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         category.setAdapter(adapter);
         category.setOnItemSelectedListener(this);
 
+        //set on click listener for cancel button
         cancelReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +83,7 @@ public class NewReview extends AppCompatActivity implements AdapterView.OnItemSe
             }
         });
 
+        //set on click listener for post button
         postReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,8 +92,8 @@ public class NewReview extends AppCompatActivity implements AdapterView.OnItemSe
                         reviewDet.getText().toString(),
                         name,
                         currentDate );
-                Intent intent = new Intent(NewReview.this, Dashboard.class);
-                startActivity(intent);
+
+
             }
         });
     }
@@ -102,6 +113,7 @@ public class NewReview extends AppCompatActivity implements AdapterView.OnItemSe
         ContentValues values = new ContentValues();
 
         if(categorySelected.equals("Select Product Category")){
+            //alert dialog for select the product category
             new AlertDialog.Builder(this)
                     .setIcon(R.drawable.ic_warning)
                     .setMessage("Please select the category of your product")
@@ -113,6 +125,7 @@ public class NewReview extends AppCompatActivity implements AdapterView.OnItemSe
                     })
                     .show();
         } else{
+            //put values from DBHelper class table review for review details
             values.put(DBHelper.row_namaProduk, productName);
             values.put(DBHelper.row_category, productCategory);
             values.put(DBHelper.row_isiReview, reviewDetail);
@@ -120,7 +133,10 @@ public class NewReview extends AppCompatActivity implements AdapterView.OnItemSe
             values.put(DBHelper.row_tanggal, reviewDate);
             dbHelper.insertReview(values);
 
+            // make toast for display a text that review succesfully posted
             Toast.makeText(NewReview.this, "Review Posted", Toast.LENGTH_SHORT).show();
+            //after review has posted, it will go back to the page before
+            finish();
         }
     }
 }

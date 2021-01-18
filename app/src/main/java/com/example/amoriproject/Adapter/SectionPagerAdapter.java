@@ -13,9 +13,12 @@ import java.util.ArrayList;
 
 public class SectionPagerAdapter extends FragmentPagerAdapter {
 
+    //define variables
     private int numOfTabs;
     private ArrayList<String> title;
 
+    //constructor
+    // section page adapter is for input public review fragment and my review fragment
     public SectionPagerAdapter( FragmentManager fm, int numOfTabs) {
 
         super(fm);
@@ -28,6 +31,7 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
+        //switch position of public review fragment and my review fragment
         switch (position){
             case 0:
                 return new PublicReviewFragment();

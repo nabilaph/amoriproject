@@ -25,10 +25,12 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class RVAdapterMyRev extends RecyclerView.Adapter<RVAdapterMyRev.RVviewHolder> {
 
+    //define variables
     private Context context;
     private ArrayList<String> product_name, product_category, review_detail, review_date, username;
     private DBHelper dbHelper;
 
+    //constructor
     public RVAdapterMyRev(Context context, ArrayList product_name, ArrayList product_category,
                           ArrayList review_detail, ArrayList review_date, ArrayList username){
         this.context = context;
@@ -37,6 +39,8 @@ public class RVAdapterMyRev extends RecyclerView.Adapter<RVAdapterMyRev.RVviewHo
         this.review_date = review_date;
         this.review_detail = review_detail;
         this.username = username;
+
+        //get data from database
         dbHelper = new DBHelper(context);
     }
 
@@ -50,17 +54,23 @@ public class RVAdapterMyRev extends RecyclerView.Adapter<RVAdapterMyRev.RVviewHo
 
     @Override
     public void onBindViewHolder(@NonNull final RVviewHolder holder, final int position) {
+
+        //set text for review layout
         holder.txt_productName.setText(String.valueOf(product_name.get(position)));
         holder.txt_productCategory.setText(String.valueOf(product_category.get(position)));
         holder.txt_reviewDet.setText(String.valueOf(review_detail.get(position)));
         holder.txt_reviewDate.setText(String.valueOf(review_date.get(position)));
         holder.txt_username.setText(String.valueOf(username.get(position)));
 
+        // set on click listener for delete button
         holder.deleteRev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                //get review id from database
                 final int id = dbHelper.getIdRev(product_name.get(position), product_category.get(position),
                         review_detail.get(position), username.get(position),  review_date.get(position));
+
+                // alert dialog for make sure are the user want to delete this review
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setCancelable(false);
                 builder.setMessage("Are you sure to delete this review?");
@@ -68,9 +78,14 @@ public class RVAdapterMyRev extends RecyclerView.Adapter<RVAdapterMyRev.RVviewHo
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        //delete review by id
                         boolean res = dbHelper.deleteReview(String.valueOf(id));
                         if (res){
+
+                            //make toast for tell the user that post has been successful deleted
                             Toast.makeText(v.getContext(), "This post has been successfully deleted", Toast.LENGTH_SHORT).show();
+
+                            //remove data from array list
                             product_name.remove(position);
                             product_category.remove(position);
                             review_date.remove(position);
@@ -91,18 +106,22 @@ public class RVAdapterMyRev extends RecyclerView.Adapter<RVAdapterMyRev.RVviewHo
             }
         });
 
+        //set on click listener edit button
         holder.editRev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //get id from database
                 int id = dbHelper.getIdRev(product_name.get(position), product_category.get(position),
                         review_detail.get(position), username.get(position),  review_date.get(position));
 
+                //put id to sp
                 SharedPreferences.Editor editor = holder.sp.edit();
                 editor.putInt(holder.KEY_REVIEWID, id);
                 editor.commit();
 
+                //change page to edit review
                 Intent intent = new Intent(v.getContext(), EditReview.class);
-                intent.putExtra("rev_id", id);
 
                 v.getContext().startActivity(intent);
             }
@@ -116,11 +135,11 @@ public class RVAdapterMyRev extends RecyclerView.Adapter<RVAdapterMyRev.RVviewHo
 
     public class RVviewHolder extends RecyclerView.ViewHolder{
 
+        //define variables
         TextView txt_productName, txt_productCategory,txt_reviewDet, txt_reviewDate, txt_username;
         Button deleteRev, editRev;
 
-        DBHelper dbHelper = new DBHelper(context);
-
+        // define the name of shared preferences and key
         String KEY_REVIEWID = "idRev";
         String SP_NAME = "mypref";
         SharedPreferences sp;
@@ -128,8 +147,10 @@ public class RVAdapterMyRev extends RecyclerView.Adapter<RVAdapterMyRev.RVviewHo
         public RVviewHolder(@NonNull final View itemView) {
             super(itemView);
 
+            //get shared preferences
             sp = itemView.getContext().getSharedPreferences(SP_NAME, MODE_PRIVATE);
 
+            // find components by id according to the defined variable
             txt_productName = itemView.findViewById(R.id.text_productName);
             txt_productCategory = itemView.findViewById(R.id.text_productCategory);
             txt_reviewDet = itemView.findViewById(R.id.text_reviewDet);

@@ -5,12 +5,14 @@ import android.os.Parcelable;
 
 public class userModel implements Parcelable {
 
+    //define variables
     int row_idUser;
     String row_fullname;
     String row_email;
     String row_username;
     String row_password;
 
+    //constructor for user model class
     public userModel(int row_idUser, String row_fullname, String row_email, String row_username, String row_password) {
         this.row_idUser = row_idUser;
         this.row_fullname = row_fullname;
@@ -27,6 +29,7 @@ public class userModel implements Parcelable {
         row_password = in.readString();
     }
 
+    //setter and getter for user model class
     public static final Creator<userModel> CREATOR = new Creator<userModel>() {
         @Override
         public userModel createFromParcel(Parcel in) {

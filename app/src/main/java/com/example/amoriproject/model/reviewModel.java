@@ -5,12 +5,14 @@ import android.os.Parcelable;
 
 public class reviewModel implements Parcelable {
 
+    //define variables
     int row_idReview;
     String row_namaProduk;
     String row_category;
     String row_isiReview;
     String row_tanggal;
 
+    //get constructor for review model class
     public reviewModel(int row_idReview, String row_namaProduk, String row_category, String row_isiReview, String row_tanggal) {
         this.row_idReview = row_idReview;
         this.row_namaProduk = row_namaProduk;
@@ -27,6 +29,7 @@ public class reviewModel implements Parcelable {
         row_tanggal = in.readString();
     }
 
+    //setter and getter for review model class
     public static final Creator<reviewModel> CREATOR = new Creator<reviewModel>() {
         @Override
         public reviewModel createFromParcel(Parcel in) {

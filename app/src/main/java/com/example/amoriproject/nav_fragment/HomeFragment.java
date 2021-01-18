@@ -27,17 +27,15 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class HomeFragment extends Fragment {
 
+    // define variables
     Button Makeup, Skincare, bodyCare, beautyTools;
 
-    Context context;
     View myFragment;
-    DBHelper db;
 
     SharedPreferences sp;
 
+    // define the name of shared preferences and key
     String SP_NAME = "mypref";
-    String KEY_UNAME = "username";
-    String KEY_PASS = "password";
     String KEY_CATEGORY = "category";
 
     public HomeFragment (){
@@ -54,13 +52,16 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         myFragment = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // find components by id according to the defined variable
         Makeup = myFragment.findViewById(R.id.Makeup);
         Skincare = myFragment.findViewById(R.id.Skincare);
         bodyCare = myFragment.findViewById(R.id.bodyCare);
         beautyTools = myFragment.findViewById(R.id.beautyTools);
 
+        //get shared preferences
         sp = getContext().getSharedPreferences(SP_NAME, MODE_PRIVATE);
 
+        //set on click listener make up category button
         Makeup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +75,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //set on click listener skincare category button
         Skincare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +89,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //set on click listener body care category button
         bodyCare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +103,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //set on click listener beauty tools category button
         beautyTools.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
